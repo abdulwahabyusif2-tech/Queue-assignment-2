@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Call Center Queue Simulator</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Call Center Queue Simulator</h1>
+      <p>Calls wait in first-in, first-out queues. VIP callers are served first.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="stats wide" aria-label="Statistics">
+      <div class="stat s1"><b id="sWaiting">0</b><span>Calls waiting</span></div>
+      <div class="stat s2"><b id="sHandled">0</b><span>Calls handled</span></div>
+      <div class="stat s3"><b id="sWait">0s</b><span>Average wait</span></div>
+      <div class="stat s4"><b id="sDur">0s</b><span>Average call length</span></div>
+    </section>
+
+    <section class="card">
+      <h2>New incoming call</h2>
+      <form id="callForm">
+        <label>Caller name <input id="name" placeholder="e.g. Ama Mensah" required></label>
+        <label>Phone <input id="phone" placeholder="e.g. 0244000000" required></label>
+        <label>Issue <input id="issue" placeholder="e.g. Billing question" required></label>
+        <label class="check"><input type="checkbox" id="vip"> VIP customer</label>
+        <button type="submit">Add to queue</button>
+      </form>
+      <div class="row">
+        <button id="sampleBtn" class="secondary">Load sample calls</button>
+        <button id="exportBtn" class="secondary">Export log (CSV)</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="head">
+        <h2>Waiting queues</h2>
+        <button id="dispatchBtn">Dispatch</button>
+      </div>
+      <label class="check"><input type="checkbox" id="auto" checked> Auto-dispatch when an agent is free</label>
+      <h3>VIP queue <span id="vipCount" class="badge">0</span></h3>
+      <ol id="vipList" class="list"></ol>
+      <h3>Standard queue <span id="normalCount" class="badge">0</span></h3>
+      <ol id="normalList" class="list"></ol>
+    </section>
+
+    <section class="card">
+      <h2>Agents</h2>
+      <div id="agents"></div>
+    </section>
+
+    <section class="card wide">
+      <h2>Call log</h2>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>#</th><th>Caller</th><th>Issue</th><th>Type</th><th>Agent</th><th>Wait</th><th>Duration</th></tr></thead>
+          <tbody id="logBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>Built with HTML, CSS and JavaScript. The queue is a linked list in <code>js/queue.js</code>.</footer>
+
+  <script src="js/queue.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
